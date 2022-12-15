@@ -3,7 +3,7 @@ import pandas as pd
 from flask import Flask, request
 from datetime import datetime
  
-# make Flask app
+# Make Flask app
 app = Flask(__name__)
  
 @app.route('/schedule', methods=['POST'])
@@ -23,11 +23,11 @@ def schedule():
 	if request_data:
 		for day in day_strings:
 			if day in request_data:
-				# determine if there are events for the day before unpacking json
+				# Determine if there are events for the day before unpacking json
 				if (len(request_data[day]) > 0):
 					day_schedule = []
 					appt_times = []
-					# unpack json
+					# Unpack json
 					for appointment in request_data[day]:
 						if title in appointment:
 							appt_name = appointment[title]
@@ -42,14 +42,14 @@ def schedule():
 						day_schedule.append(new_appointment)
 						appt_times.append([int(appointment[start]), int(appointment[end])])
 					
-					#Sort the events of the day by start time
+					# Sort the events of the day by start time
 					# Remove trailing minutes when empty as per guidelines
 					day_schedule.sort(key = lambda x: x.split()[-1])	
 					for event in day_schedule:
 						event = event.replace(":00", "")
 						output_schedule.append(event)
 					
-					# if a conflict already exists in the weekly schedule, do not need to check further
+					# If a conflict already exists in the weekly schedule, no need to check further
 					if not conflict:
 						conflict = check_overlap_list(appt_times)
 				else:
@@ -63,7 +63,7 @@ def schedule():
 		
 	return output_schedule
 
-# Time, which is given in seconds, is converted to 24H then 12H time
+# Time, which is given in seconds, is converted first to 24H then 12H time
 def convert_time(time_seconds):
 	appt_time  = time.strftime('%H:%M', time.gmtime(int(time_seconds)))
 	converted_time = datetime.strptime(appt_time, "%H:%M")
@@ -88,7 +88,6 @@ def check_overlap_list(times):
 					return True
 	return False
 
-# main driver function
+# Main driver function
 if __name__ == '__main__':
-# run app in debug mode on port 5000
     app.run(debug=True, port=5000)
