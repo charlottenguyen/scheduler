@@ -21,4 +21,4 @@ header "Content-Type: application/json"
 <img width="1407" alt="Screen Shot 2022-12-14 at 3 55 43 PM" src="https://user-images.githubusercontent.com/32961623/207741947-ae1d3842-fdaa-4407-878c-2bab27276954.png">
 
 
-For more information on using Flask, check out this tutorial I followed https://www.digitalocean.com/community/tutorials/processing-incoming-request-data-in-flask.
+For more information on using Flask, check out this tutorial I followed: https://www.digitalocean.com/community/tutorials/processing-incoming-request-data-in-flask.
